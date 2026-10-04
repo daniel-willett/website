@@ -88,3 +88,20 @@ Next we need to make a valid URL for this template to be displayed from (i.e. fr
 
 And that's it. This should now be viewable.
 To actually interact with this, we'll need the help of the admin pannel (provided by Django)
+
+
+
+To do this, we use the superuser command:
+```
+$ python manage.py createsuperuser
+```
+for my example i made the user danielw
+
+Then run the server and go to http://127.0.0.1:8000/admin
+
+Then you can see the default `Authentication and Authorization` groups and under it is `EVENTS` with `Userss` (yes double "s"). 
+Click "add".
+I'm going to make `test user 1` with password `b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9` ("hello world" sha-256)
+And again make `test user 2` with password `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` (empty input sha-256)
+
+Now go back to http://127.0.0.1:8000/users/ and you can see the users being displayed
