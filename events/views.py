@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse
 from .models import Users
 
@@ -9,3 +10,6 @@ def users(request):
     items = Users.objects.all()
     return render(request, "users.html", {"users": items})
 
+@login_required
+def calendar(request):
+    return render(request, "events/calendar.html")

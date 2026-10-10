@@ -105,3 +105,32 @@ I'm going to make `test user 1` with password `b94d27b9934d3e08a52e52d7da7dabfac
 And again make `test user 2` with password `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` (empty input sha-256)
 
 Now go back to http://127.0.0.1:8000/users/ and you can see the users being displayed
+
+
+=====================================
+
+Django has a login system built into it. It has a `Users` already so we can use that actually.
+First we edit `config/settings.py` by adding these lines:
+```
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/accounts/login/"
+```
+
+Then we add this line to `config/urls.py`:
+```
+    ...
+    path("", include("events.urls")),
+    path("accounts/", include("django.contrib.auth.urls")),
+    ]
+    ...
+```
+
+We add a login html file at `events/templates/registration/login.html` which tells django automatically what this is for by making this file path.
+Finally to `event/views.py` we add the following lines:
+```
+from django.contrib.auth.decorators import login_required
+...
+@login_required
+def calendar(request):
+    return render(request, "events/calendar.html")
+```
